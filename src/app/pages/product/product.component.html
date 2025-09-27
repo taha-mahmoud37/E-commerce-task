@@ -2,10 +2,17 @@
   <app-side-filter
     (selectedCategory)="onCategorySelected($event)"
   ></app-side-filter>
-  <div class="row">
-    @for (product of products(); track $index) {
-    <app-card [product]="product"></app-card>
+  <div style="display: flex; flex-direction: column; gap: 20px; flex: 1">
+    <div class="row">
+      @for (product of products(); track $index) {
+      <app-card [product]="product"></app-card>
 
-    }
+      }
+    </div>
+    <app-pagination
+      [totalItems]="totalItems"
+      [itemsPerPage]="limit"
+      (pageChange)="onPageChange($event)"
+    ></app-pagination>
   </div>
 </section>

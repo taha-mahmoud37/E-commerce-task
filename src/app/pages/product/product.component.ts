@@ -3,37 +3,43 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { SideFilterComponent } from './side-filter/side-filter.component';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product.model';
+import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CardComponent, SideFilterComponent],
+  imports: [CardComponent, SideFilterComponent, PaginationComponent],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
   products = signal<Product[]>([]); // signal coming from service
   selectedCategory: string | null = null;
+  totalItems: number = 100;
+  limit: number = 15;
+  currentPage: number = 1;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllProducts(this.limit, 0);
   }
   // Fetch all products from the service and update the signal
-  getAllProducts(): void {
-    this.productService.getAllProducts().subscribe((res) => {
+  getAllProducts(limit: number, skip: number): void {
+    this.productService.getAllProducts(limit, skip).subscribe((res) => {
       if (res?.products.length) {
         this.products.update(() => res.products);
+        this.totalItems = res.total;
       }
     });
   }
 
   // Fetch products by category from the service and update the signal
-  getProductsByCategory(category: string): void {
-    this.productService.getProductsByCategory(category).subscribe((res) => {
+  getProductsByCategory(category: string, limit: number, skip: number): void {
+    this.productService.getProductsByCategory(category, limit, skip).subscribe((res) => {
       if (res?.products.length) {
         this.products.update(() => res.products);
+        this.totalItems = res.total;
       }
     });
   }
@@ -41,11 +47,21 @@ export class ProductComponent implements OnInit {
   // Handle category selection from the side filter component
   onCategorySelected(category: string): void {
     this.selectedCategory = category;
+    const skip = (this.currentPage - 1) * this.limit;
     if (category === 'all') {
-      this.getAllProducts();
+      this.getAllProducts(this.limit, skip);
       return;
     }
 
-    this.getProductsByCategory(category);
+    this.getProductsByCategory(category, this.limit, skip);
+  }
+
+  // Pagination properties
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    const skip = (page - 1) * this.limit;
+    this.getAllProducts(this.limit, skip);
+    // Implement logic to fetch products for the selected page if needed
   }
 }

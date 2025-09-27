@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+
+  .btn {
+    box-shadow: 0px 7px 64px 0px #00000012;
+    border: 1px solid #f6f6f6;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+    text-align: center;
+    background-color: #fff;
+    padding: 6px 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 0;
+    &:hover {
+      background-color: #41cccc;
+      color: #1e1e1e;
+      border: none;
+    }
+
+    &.active {
+      color: #1e1e1e;
+      border: none;
+      background-color: #41cccc;
+    }
+  }
+}

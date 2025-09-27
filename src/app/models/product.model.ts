@@ -11,3 +11,11 @@ export interface Product {
   reviews?: any[];
   images: string;
 }
+
+
+export interface ProductResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
