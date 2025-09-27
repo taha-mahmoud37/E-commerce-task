@@ -1,5 +1,5 @@
 import { Component, OnInit, signal, Signal } from '@angular/core';
-import { CardComponent } from '../../../shared/components/card/card.component';
+import { CardComponent } from '../../shared/components/card/card.component';
 import { SideFilterComponent } from './side-filter/side-filter.component';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product.model';

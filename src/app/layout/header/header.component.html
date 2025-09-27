@@ -13,9 +13,7 @@
         <ul class="nav-links">
           <li><a routerLink="/" class="nav-link">Home</a></li>
         </ul>
-        <div class="auth-buttons">
-          <button class="dl-btn btn-login">Login</button>
-        </div>
+        @if(isLoggedIn) {
         <div class="search-container">
           <div class="search-box">
             <input type="text" class="search-input" placeholder="Search" />
@@ -28,9 +26,16 @@
               <img src="/images/cart.svg" alt="cart" />
               <span class="cart-count">0</span>
             </button>
-            <span class="account">Account</span>
+            <span class="account" role="button" (click)="logout()"
+              >Account</span
+            >
           </div>
         </div>
+        } @else {
+        <div class="auth-buttons">
+          <button class="dl-btn btn-login">Login</button>
+        </div>
+        }
       </div>
     </div>
   </div>

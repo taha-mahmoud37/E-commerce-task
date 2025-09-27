@@ -1,16 +1,35 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'system', pathMatch: 'full' },
   {
-    path: 'system',
-    loadChildren: () =>
-      import('./system/system.routes').then((m) => m.systemRoutes),
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'system',
+      },
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./pages/login/login.component').then((c) => c.LoginComponent),
+      },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./pages/product/product.component').then(
+            (c) => c.ProductComponent
+          ),
+      },
+    ],
   },
+
   {
     path: '**',
     loadComponent: () =>
-      import('./system/pages/not-found/not-found.component').then(
+      import('./pages/not-found/not-found.component').then(
         (c) => c.NotFoundComponent
       ),
   },

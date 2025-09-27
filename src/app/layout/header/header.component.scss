@@ -41,7 +41,6 @@
           }
         }
         .auth-buttons {
-          display: block;
           .btn-login {
             background-color: transparent;
             border: none;
@@ -53,7 +52,7 @@
           }
         }
         .search-container {
-          display: none;
+          display: flex;
           align-items: center;
           gap: 24px;
           .search-box {

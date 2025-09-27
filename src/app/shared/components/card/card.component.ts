@@ -1,5 +1,5 @@
 import { Component, input, OnChanges } from '@angular/core';
-import { Product } from '../../../system/models/product.model';
+import { Product } from '../../../models/product.model';
 import { pipe } from 'rxjs';
 import { CommonModule, DecimalPipe } from '@angular/common';
 
