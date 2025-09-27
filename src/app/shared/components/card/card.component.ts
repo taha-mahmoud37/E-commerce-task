@@ -9,10 +9,6 @@ import { CommonModule, DecimalPipe } from '@angular/common';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
 })
-export class CardComponent implements OnChanges {
+export class CardComponent {
   product = input<Product>({} as Product);
-
-  ngOnChanges(): void {
-    console.log('CardComponent - Product input changed:', this.product());
-  }
 }

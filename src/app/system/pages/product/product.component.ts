@@ -18,17 +18,34 @@ export class ProductComponent implements OnInit {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
+    this.getAllProducts();
+  }
+  // Fetch all products from the service and update the signal
+  getAllProducts(): void {
     this.productService.getAllProducts().subscribe((res) => {
       if (res?.products.length) {
-        this.products.set(res.products);
-        console.log('Products fetched in ProductComponent:', res.products);
-        console.log('Products signal in ProductComponent:', this.products());
+        this.products.update(() => res.products);
       }
     });
   }
 
+  // Fetch products by category from the service and update the signal
+  getProductsByCategory(category: string): void {
+    this.productService.getProductsByCategory(category).subscribe((res) => {
+      if (res?.products.length) {
+        this.products.update(() => res.products);
+      }
+    });
+  }
+
+  // Handle category selection from the side filter component
   onCategorySelected(category: string): void {
     this.selectedCategory = category;
-    console.log(`Selected category in ProductComponent: ${category}`);
+    if (category === 'all') {
+      this.getAllProducts();
+      return;
+    }
+
+    this.getProductsByCategory(category);
   }
 }

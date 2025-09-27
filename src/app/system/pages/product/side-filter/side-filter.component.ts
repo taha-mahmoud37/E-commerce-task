@@ -36,9 +36,6 @@ export class SideFilterComponent {
   ];
   selectedCategory = output<string>();
 
-  clearFilter() {
-    // Clear filter logic here
-  }
   filterByCategory(category: string) {
     // Filter by category logic here
     console.log(`Filtering by category: ${category}`);
