@@ -7,4 +7,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./system/system.routes').then((m) => m.systemRoutes),
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./system/pages/not-found/not-found.component').then(
+        (c) => c.NotFoundComponent
+      ),
+  },
 ];
