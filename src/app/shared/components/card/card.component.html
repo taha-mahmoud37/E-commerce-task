@@ -2,39 +2,44 @@
   <div class="card-header">
     <img src="/images/product.svg" alt="" class="card-image" />
     <div class="dl-badge badge-teal">
-      <span>-{{ card()?.discountPercentage }}%</span>
+      <span>-{{ product().discountPercentage }}%</span>
     </div>
   </div>
   <div class="card-body">
-    <h3 class="card-title">{{ card()?.title }}</h3>
-    <p class="card-text">{{ card()?.description }}</p>
+    <h3 class="card-title">{{ product().title }}</h3>
+    <p class="card-text">{{ product().description }}</p>
     <div class="price">
       <span class="old-price">
-        {{ card()?.price }} <span class="currancy">USD</span></span
-      >
+        {{ product().price | number : "1.2-2" }}
+        <span class="currancy">USD</span>
+      </span>
       <span class="current-price">
-        {{ card()?.price - (card()?.price * card()?.discountPercentage) / 100 }}
+        {{
+          product().price -
+            (product().price * product().discountPercentage) / 100
+            | number : "1.2-2"
+        }}
         <span class="currancy">USD</span>
       </span>
     </div>
     <div class="meta-info">
       <div>
         <span class="label">Brand:</span>
-        <span class="value">{{ card()?.brand }}</span>
+        <span class="value">{{ product().brand || "-" }}</span>
       </div>
       <div>
         <span class="label">Category:</span>
-        <span class="value">{{ card()?.category }}</span>
+        <span class="value">{{ product().category || "-" }}</span>
       </div>
       <div>
         <span class="label">In stock:</span>
-        <span class="value">{{ card()?.stock }}</span>
+        <span class="value">{{ product().stock || "-" }}</span>
       </div>
     </div>
     <div class="rating">
       <span class="star">★</span>
-      <span class="rate-value">{{ card()?.rating }}</span>
-      <span class="rate-count">({{ card()?.reviews?.length || 0 }})</span>
+      <span class="rate-value">{{ product().rating }}</span>
+      <span class="rate-count">({{ product().reviews?.length || 0 }})</span>
     </div>
   </div>
   <div class="card-footer">
