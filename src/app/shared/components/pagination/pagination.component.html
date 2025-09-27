@@ -1,1 +1,24 @@
-<p>pagination works!</p>
+<div class="pagination">
+  <button
+    (click)="updatePage(currentPage() - 1)"
+    [disabled]="currentPage() === 1"
+    class="btn"
+  >
+    Previous
+  </button>
+  @for (page of pages; track $index) {
+  <span
+    (click)="updatePage(page)"
+    class="btn"
+    [class.active]="page === currentPage()"
+    >{{ page }}</span
+  >
+  }
+  <button
+    (click)="updatePage(currentPage() + 1)"
+    [disabled]="currentPage() >= totalPagesNumber"
+    class="btn"
+  >
+    Next
+  </button>
+</div>
