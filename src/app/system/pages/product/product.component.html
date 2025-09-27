@@ -1,0 +1,11 @@
+<section class="container">
+  <app-side-filter
+    (selectedCategory)="onCategorySelected($event)"
+  ></app-side-filter>
+  <div class="row">
+    @for (product of products(); track $index) {
+    <app-card [product]="product"></app-card>
+
+    }
+  </div>
+</section>

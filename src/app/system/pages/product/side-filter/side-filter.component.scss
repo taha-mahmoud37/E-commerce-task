@@ -1,0 +1,53 @@
+.side-filter {
+  border: 0.5px solid #424242;
+  border-radius: 8px;
+  padding: 12px;
+  width: 282px;
+  .title {
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    color: #1e1e1e;
+    text-transform: capitalize;
+  }
+  .dl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    .filter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 18px;
+        height: 18px;
+        border: 2px solid #41cccc;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+      }
+
+      input[type="radio"]:checked::before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        inset-inline-start: 2.3px;
+        width: 10px;
+        height: 10px;
+        background-color: #41cccc;
+        border-radius: 50%;
+      }
+
+      label {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 100%;
+        color: #1e1e1e;
+        cursor: pointer;
+      }
+    }
+  }
+}
