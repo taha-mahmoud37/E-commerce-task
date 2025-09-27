@@ -1,7 +1,6 @@
 @use "../assets/styles/main.scss" as *;
 
 .container {
-  padding-inline: 100px;
   .row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

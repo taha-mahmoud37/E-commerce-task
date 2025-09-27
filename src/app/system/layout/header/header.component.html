@@ -1,0 +1,37 @@
+<nav class="navbar">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a routerLink="/">
+          <img src="/images/Logo.svg" alt="logo" class="img-logo" />
+        </a>
+      </div>
+      <div class="toogle">
+        <button aria-label="toggle-menu" class="btn btn-toggle"></button>
+      </div>
+      <div class="nav-auth">
+        <ul class="nav-links">
+          <li><a routerLink="/" class="nav-link">Home</a></li>
+        </ul>
+        <div class="auth-buttons">
+          <button class="dl-btn btn-login">Login</button>
+        </div>
+        <div class="search-container">
+          <div class="search-box">
+            <input type="text" class="search-input" placeholder="Search" />
+            <button class="btn btn-search" aria-label="search-btn">
+              <img src="/images/search-icon.svg" alt="search" />
+            </button>
+          </div>
+          <div class="cart-account">
+            <button class="btn btn-cart" aria-label="cart-btn">
+              <img src="/images/cart.svg" alt="cart" />
+              <span class="cart-count">0</span>
+            </button>
+            <span class="account">Account</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
