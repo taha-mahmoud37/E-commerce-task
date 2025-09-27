@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { env } from '../../env/env';
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   TOKEN_KEY: string = 'auth_token';
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  isLoggedIn = signal<boolean>(!!this.getCookie(this.TOKEN_KEY));
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
     return this.httpClient
@@ -17,6 +18,7 @@ export class AuthService {
       .pipe(
         tap((response: any) => {
           this.setCookie(this.TOKEN_KEY, response?.token, 1);
+          this.isLoggedIn.set(true);
         }),
         catchError((error: any) => {
           console.error('Login failed', error);
@@ -51,11 +53,12 @@ export class AuthService {
 
   deleteCookie(name: string): void {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    this.isLoggedIn.set(false);
   }
 
-  isLoggedIn(): boolean {
-    return !!this.getCookie(this.TOKEN_KEY);
-  }
+  // isLoggedIn(): boolean {
+  //   return !!this.getCookie(this.TOKEN_KEY);
+  // }
 
   logout(): void {
     this.deleteCookie(this.TOKEN_KEY);

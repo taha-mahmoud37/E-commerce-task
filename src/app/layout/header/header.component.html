@@ -13,7 +13,7 @@
         <ul class="nav-links">
           <li><a routerLink="/" class="nav-link">Home</a></li>
         </ul>
-        @if(isLoggedIn) {
+        @if(authService.isLoggedIn()) {
         <div class="search-container">
           <div class="search-box">
             <input type="text" class="search-input" placeholder="Search" />
