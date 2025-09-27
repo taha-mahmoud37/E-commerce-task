@@ -1,0 +1,26 @@
+<div class="side-filter">
+  <h4 class="title">Products</h4>
+  <form class="dl-form">
+    <div class="filter">
+      <input
+        type="radio"
+        name="filter"
+        id="all"
+        checked
+        (click)="clearFilter()"
+      />
+      <label for="all">All</label>
+    </div>
+    @for (category of allCategories; track $index) {
+    <div class="filter">
+      <input
+        type="radio"
+        name="filter"
+        id="{{ category | lowercase }}"
+        (click)="filterByCategory(category)"
+      />
+      <label for="{{ category | lowercase }}">{{ category }}</label>
+    </div>
+    }
+  </form>
+</div>

@@ -12,15 +12,19 @@ export const systemRoutes: Routes = [
         redirectTo: 'products',
         pathMatch: 'full',
       },
+      {
+        path: 'products',
+        loadComponent: () =>
+          import('./pages/product/product.component').then(
+            (c) => c.ProductComponent
+          ),
+      },
       //   {
       //     path: 'dashboard',
       //     canActivate: [authGuard , adminGuard ],
       //     loadComponent: () => import('./pages/dashboard/dashboard.component').then(c => c.DashboardComponent)
       //   },
-      //   {
-      //     path: 'products',
-      //     loadComponent: () => import('./pages/product-list/product-list.component').then(c => c.ProductListComponent)
-      //   },
+      //
       //   {
       //     path: 'product/:id',
       //     loadComponent: () => import('./pages/product-detail/product-detail.component').then(c => c.ProductDetailComponent)

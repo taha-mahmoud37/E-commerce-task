@@ -1,0 +1,10 @@
+.container {
+  padding: 80px 100px 104px;
+  display: flex;
+  gap: 24px;
+  .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
