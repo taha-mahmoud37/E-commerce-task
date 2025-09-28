@@ -15,9 +15,9 @@
       </span>
       <span class="current-price">
         {{
-          product().price -
-            (product().price * product().discountPercentage) / 100
-            | number : "1.2-2"
+        product().price -
+        (product().price * product().discountPercentage) / 100
+        | number : "1.2-2"
         }}
         <span class="currancy">USD</span>
       </span>
@@ -43,6 +43,6 @@
     </div>
   </div>
   <div class="card-footer">
-    <button class="dl-btn main-btn">Add to Cart</button>
+    <button class="dl-btn main-btn" (click)="addedItemToCart(product())">Add to Cart</button>
   </div>
 </div>

@@ -17,6 +17,7 @@ export class AuthService {
       .post(`${env.apiUrl}auth/login`, { username, password })
       .pipe(
         tap((response: any) => {
+          localStorage.setItem('userId', response.id);
           const token = response?.token;
           this.setCookie(this.TOKEN_KEY, response?.token, 1);
           this.isloggedIn.set(true);
@@ -63,6 +64,7 @@ export class AuthService {
 
   logout(): void {
     this.deleteCookie(this.TOKEN_KEY);
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }
