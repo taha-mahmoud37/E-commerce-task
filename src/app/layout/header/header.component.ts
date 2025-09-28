@@ -9,11 +9,9 @@ import { AuthService } from '../../service/auth.service';
 })
 export class HeaderComponent implements OnInit {
   isLoggedIn!: boolean;
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-  }
+  ngOnInit(): void {}
 
   logout(): void {
     this.authService.logout();

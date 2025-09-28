@@ -13,7 +13,7 @@
         <ul class="nav-links">
           <li><a routerLink="/" class="nav-link">Home</a></li>
         </ul>
-        @if(isLoggedIn) {
+        @if(authService.isloggedIn()) {
         <div class="search-container">
           <div class="search-box">
             <input type="text" class="search-input" placeholder="Search" />
@@ -26,9 +26,7 @@
               <img src="/images/cart.svg" alt="cart" />
               <span class="cart-count">0</span>
             </button>
-            <span class="account" role="button" (click)="logout()"
-              >Account</span
-            >
+            <span class="account" role="button" (click)="logout()">Account</span>
           </div>
         </div>
         } @else {
