@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
+import { authGuard, publicGuard } from './Core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -13,11 +14,13 @@ export const routes: Routes = [
       },
       {
         path: 'login',
+        canMatch: [publicGuard],
         loadComponent: () =>
           import('./pages/login/login.component').then((c) => c.LoginComponent),
       },
       {
         path: 'products',
+        canMatch: [authGuard],
         loadComponent: () =>
           import('./pages/product/product.component').then(
             (c) => c.ProductComponent

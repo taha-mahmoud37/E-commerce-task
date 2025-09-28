@@ -12,10 +12,14 @@ export interface Product {
   images: string;
 }
 
-
 export interface ProductResponse {
   products: Product[];
   total: number;
   skip: number;
   limit: number;
+}
+
+export interface AddCartVariables {
+  userId: number;
+  products: { id: number; quantity: number }[];
 }
