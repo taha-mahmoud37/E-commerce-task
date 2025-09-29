@@ -29,3 +29,9 @@
     }
   }
 }
+
+@media (max-width: 758px) {
+  .pagination {
+    flex-wrap: wrap;
+  }
+}
