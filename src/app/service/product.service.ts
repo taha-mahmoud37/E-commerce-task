@@ -2,7 +2,7 @@ import { AddCartVariables } from './../models/product.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { env } from '../../env/env';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, debounce, debounceTime, Observable } from 'rxjs';
 import { Product, ProductResponse } from '../models/product.model';
 
 @Injectable({
@@ -11,6 +11,8 @@ import { Product, ProductResponse } from '../models/product.model';
 export class ProductService {
   cartsItems$ = new BehaviorSubject<number>(0);
   carts$ = new BehaviorSubject<any>([]);
+  private searchTerm = new BehaviorSubject<string>('');
+  searchTerm$ = this.searchTerm.asObservable().pipe(debounceTime(300));
 
   constructor(private httpClient: HttpClient) {}
 
@@ -56,5 +58,9 @@ export class ProductService {
   addToCart(item: any): void {
     const current = this.carts$.getValue();
     this.carts$.next([...current, item]);
+  }
+
+  setSearchTerm(term: string): void {
+    this.searchTerm.next(term);
   }
 }
