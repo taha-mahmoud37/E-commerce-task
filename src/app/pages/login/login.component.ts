@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -35,15 +36,18 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     if (this.loginForm.valid) {
       const { username, password } = this.loginForm.value;
-      this.authService.login(username, password).subscribe({
-        next: (response) => {
-          console.log('Login successful:', response);
-          this.router.navigate(['/products']);
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-        },
-      });
+      this.authService
+        .login(username, password)
+        .pipe(takeUntilDestroyed())
+        .subscribe({
+          next: (response) => {
+            console.log('Login successful:', response);
+            this.router.navigate(['/products']);
+          },
+          error: (error) => {
+            console.error('Login failed:', error);
+          },
+        });
     } else {
       console.error('Form is invalid');
     }

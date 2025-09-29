@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   isLoggedIn!: boolean;
   cartItems: number = 0;
+
   private destory$ = new Subject<void>();
   constructor(
     public authService: AuthService,
@@ -29,6 +30,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         // this.cartItems = res.carts.length;
       }
     });
+  }
+
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.productService.setSearchTerm(value);
+    console.log(value, 'se');
   }
 
   logout(): void {

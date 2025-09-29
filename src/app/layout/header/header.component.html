@@ -16,7 +16,7 @@
         @if(authService.isloggedIn()) {
         <div class="search-container">
           <div class="search-box">
-            <input type="text" class="search-input" placeholder="Search" />
+            <input type="text" class="search-input" placeholder="Search" (input)="onSearch($event)" />
             <button class="btn btn-search" aria-label="search-btn">
               <img src="/images/search-icon.svg" alt="search" />
             </button>
