@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,6 +17,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  private destroyRef = inject(DestroyRef);
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
       const { username, password } = this.loginForm.value;
       this.authService
         .login(username, password)
-        .pipe(takeUntilDestroyed())
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
             console.log('Login successful:', response);
