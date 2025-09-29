@@ -58,10 +58,6 @@ export class AuthService {
     this.isloggedIn.set(false);
   }
 
-  // isLoggedIn(): boolean {
-  //   return !!this.getCookie(this.TOKEN_KEY);
-  // }
-
   logout(): void {
     this.deleteCookie(this.TOKEN_KEY);
     localStorage.clear();

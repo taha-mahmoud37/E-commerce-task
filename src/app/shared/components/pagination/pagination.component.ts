@@ -14,16 +14,10 @@ export class PaginationComponent implements OnChanges {
   pageChange = output<number>();
 
   pages: number[] = [];
-  constructor() {
-    console.log(this.pages);
-    console.log(this.totalPagesNumber);
-  }
+  constructor() {}
   ngOnChanges(): void {
     this.totalPagesNumber = Math.ceil(this.totalItems() / this.itemsPerPage());
-    this.pages = Array.from(
-      { length: this.totalPagesNumber },
-      (_, i) => i + 1
-    );
+    this.pages = Array.from({ length: this.totalPagesNumber }, (_, i) => i + 1);
   }
   updatePage(page: number) {
     this.currentPage.set(page);

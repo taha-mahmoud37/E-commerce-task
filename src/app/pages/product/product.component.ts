@@ -52,7 +52,6 @@ export class ProductComponent implements OnInit {
         if (res?.products.length) {
           this.products.update(() => res.products);
           this.totalItems = res.total;
-          console.log(this.products);
         }
       });
   }

@@ -8,3 +8,16 @@
     gap: 24px;
   }
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px;
+    flex-direction: column;
+    .side-filter {
+      display: none;
+    }
+    .row {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}

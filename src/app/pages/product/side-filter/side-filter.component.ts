@@ -38,7 +38,6 @@ export class SideFilterComponent {
 
   filterByCategory(category: string) {
     // Filter by category logic here
-    console.log(`Filtering by category: ${category}`);
     this.selectedCategory.emit(category);
   }
 }
