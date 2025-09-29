@@ -1,9 +1,18 @@
-import { Component, OnInit, signal, Signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+  Signal,
+} from '@angular/core';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { SideFilterComponent } from './side-filter/side-filter.component';
 import { ProductService } from '../../service/product.service';
 import { Product } from '../../models/product.model';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-product',
@@ -18,30 +27,47 @@ export class ProductComponent implements OnInit {
   totalItems: number = 100;
   limit: number = 15;
   currentPage: number = 1;
+  private productService = inject(ProductService);
+  private destroyRef = inject(DestroyRef);
 
-  constructor(private productService: ProductService) { }
+  searchTerm = toSignal(this.productService.searchTerm$, { initialValue: '' }); // convert searchTerm$ from service to signal
+
+  constructor() {}
+  // to filter data based on search
+  filteredProducts = computed(() =>
+    this.products().filter((p) =>
+      p.title.toLowerCase().includes(this.searchTerm().toLowerCase())
+    )
+  );
 
   ngOnInit(): void {
     this.getAllProducts(this.limit, 0);
   }
   // Fetch all products from the service and update the signal
   getAllProducts(limit: number, skip: number): void {
-    this.productService.getAllProducts(limit, skip).subscribe((res) => {
-      if (res?.products.length) {
-        this.products.update(() => res.products);
-        this.totalItems = res.total;
-      }
-    });
+    this.productService
+      .getAllProducts(limit, skip)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res) => {
+        if (res?.products.length) {
+          this.products.update(() => res.products);
+          this.totalItems = res.total;
+          console.log(this.products);
+        }
+      });
   }
 
   // Fetch products by category from the service and update the signal
   getProductsByCategory(category: string, limit: number, skip: number): void {
-    this.productService.getProductsByCategory(category, limit, skip).subscribe((res) => {
-      if (res?.products.length) {
-        this.products.update(() => res.products);
-        this.totalItems = res.total;
-      }
-    });
+    this.productService
+      .getProductsByCategory(category, limit, skip)
+      .pipe(takeUntilDestroyed(this.destroyRef)) // to lock subscriptions automatic
+      .subscribe((res) => {
+        if (res?.products.length) {
+          this.products.update(() => res.products);
+          this.totalItems = res.total;
+        }
+      });
   }
 
   // Handle category selection from the side filter component
