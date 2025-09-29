@@ -28,7 +28,6 @@ export class CardComponent implements OnInit {
     };
     this.productService.addedToCart(cartItems).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.productService.incrementCartItems();
       }
     });

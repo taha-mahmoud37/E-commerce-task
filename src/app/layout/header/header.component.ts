@@ -31,7 +31,10 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-
+  onSearch(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.productService.setSearchTerm(value);
+  }
   ngOnInit(): void {
     this.productService.cartsItems$
       .pipe(takeUntilDestroyed(this.destroyRef))

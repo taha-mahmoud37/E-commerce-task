@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe({
           next: (response) => {
-            console.log('Login successful:', response);
             this.router.navigate(['/products']);
           },
           error: (error) => {
